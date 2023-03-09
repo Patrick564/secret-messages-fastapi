@@ -14,6 +14,7 @@ uvicorn = {extras = ["standard"], version = "^0.20.0"}
 cryptography = "^39.0.2"
 redis = {extras = ["hiredis"], version = "^4.5.1"}
 shortuuid = "^1.0.11"
+python-dotenv = "^1.0.0"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^6.0.0"
