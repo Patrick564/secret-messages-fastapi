@@ -1,6 +1,5 @@
 import uvicorn
 import os
-import logging
 
 from fastapi import FastAPI, Depends, status, Response
 from cryptography.fernet import Fernet
@@ -13,7 +12,7 @@ from models import message
 from typing import Any
 
 
-info_logger = logging.getLogger("uvicorn.info")
+# info_logger = logging.getLogger("uvicorn.info")
 app = FastAPI()
 
 
@@ -22,7 +21,7 @@ app = FastAPI()
 
 
 def conn_redis():
-    info_logger.info("Connecting to Redis database")
+    print("INFO:     Connecting to Redis database")
 
     pool = db.create_redis()
 
