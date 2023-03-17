@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "reveal-secret-message"
-version = "0.1.0"
+version = "1.0.0"
 description = "An API to create and reveal encrypted and one time messages"
 authors = ["Patrick <pvilchez794@gmail.com>"]
 license = "MIT"
