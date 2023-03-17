@@ -1,5 +1,6 @@
 import uvicorn
 import os
+import logging
 
 from fastapi import FastAPI, Depends, status, Response
 from cryptography.fernet import Fernet
@@ -12,11 +13,19 @@ from models import message
 from typing import Any
 
 
+info_logger = logging.getLogger("uvicorn.info")
 app = FastAPI()
 
 
+# async def lifespan(app: FastAPI):
+#     yield
+
+
 def conn_redis():
+    info_logger.info("Connecting to Redis database")
+
     pool = db.create_redis()
+
     return Redis(connection_pool=pool)
 
 
