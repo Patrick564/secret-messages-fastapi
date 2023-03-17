@@ -1,3 +1,5 @@
+import uvicorn
+import os
 from fastapi import FastAPI, Depends, status, Response
 from cryptography.fernet import Fernet
 from redis import Redis
@@ -58,3 +60,12 @@ async def decrypt(
     f = Fernet(result[0]["key"])
 
     return {"message": f.decrypt(result[0]["content"])}
+
+
+if __name__ == "__main__":
+    port = os.getenv("PORT")
+
+    if port is None:
+        port = "8080"
+
+    uvicorn.run(app, host="0.0.0.0", port=int(port))
