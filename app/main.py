@@ -1,12 +1,13 @@
 import uvicorn
 import os
+
 from fastapi import FastAPI, Depends, status, Response
 from cryptography.fernet import Fernet
 from redis import Redis
 from shortuuid import uuid
 
-from config.db import create_redis
-from models.message import Message
+from config import db
+from models import message
 
 from typing import Any
 
@@ -15,14 +16,19 @@ app = FastAPI()
 
 
 def conn_redis():
-    pool = create_redis()
+    pool = db.create_redis()
     return Redis(connection_pool=pool)
+
+
+@app.get("/api/v1")
+async def index():
+    return {"home": "go to routes create or retrieve, enjoy <3"}
 
 
 @app.post("/api/v1/create", status_code=status.HTTP_201_CREATED)
 async def create(
         res: Response,
-        message: Message,
+        message: message.Message,
         client: Any = Depends(conn_redis)):
     id: str = uuid()
     key = Fernet.generate_key()
